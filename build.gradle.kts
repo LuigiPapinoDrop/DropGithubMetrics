@@ -68,12 +68,15 @@ task("runDefault", JavaExec::class) {
 }
 
 fun readProperty(name: String): String {
-    val fis = FileInputStream("local.properties")
-    val props = Properties()
-    props.load(fis)
+    val localFile = File("local.properties")
+    if (localFile.exists()) {
+        val fis = FileInputStream("local.properties")
+        val props = Properties()
+        props.load(fis)
 
-    val localProp = props.getProperty(name)
-    if (localProp != null) return localProp
+        val localProp = props.getProperty(name)
+        if (localProp != null) return localProp
+    }
     return project.property(name).toString()
 }
 

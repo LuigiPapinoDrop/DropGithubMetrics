@@ -5,5 +5,5 @@ pluginManagement {
         maven("https://plugins.gradle.org/m2/")
     }
 }
-rootProject.name = "DropGithubTools"
+rootProject.name = "DropGithubMetrics"
 
