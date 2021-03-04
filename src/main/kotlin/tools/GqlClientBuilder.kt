@@ -5,12 +5,14 @@ import io.ktor.client.engine.okhttp.*
 import io.ktor.client.features.*
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
+import io.ktor.util.*
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
 object GqlClientBuilder {
 
 
+    @KtorExperimentalAPI
     fun build(githubAccessToken: String?) = GraphQLClient(
         url = URL("https://api.github.com/graphql"),
         engineFactory = OkHttp

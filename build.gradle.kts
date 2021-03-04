@@ -6,9 +6,11 @@ import java.util.*
 val githubAccessToken: String by lazy { readProperty("githubAccessToken") }
 val repositories: String by lazy { readProperty("repositoriesToScan") }
 
+
+
 plugins {
     application
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.21"
     id("com.expediagroup.graphql") version "3.7.0"
 }
 
@@ -37,28 +39,32 @@ graphql {
         endpoint = "https://api.github.com/graphql"
         packageName = "com.adaptics.drop_github_stats.gql"
         headers["Authorization"] = "bearer $githubAccessToken"
+
     }
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_9
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "9"
+        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
+
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "9"
+        kotlinOptions.jvmTarget = "1.8"
     }
 }
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "9"
+    jvmTarget = "1.8"
+    freeCompilerArgs = listOf("-Xjsr305=strict")
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "9"
+    jvmTarget = "1.8"
 }
 
 task("runDefault", JavaExec::class) {
@@ -77,7 +83,9 @@ fun readProperty(name: String): String {
         val localProp = props.getProperty(name)
         if (localProp != null) return localProp
     }
-    return project.property(name).toString()
+    return if (project.hasProperty(name)) {
+        project.property(name).toString()
+    } else ""
 }
 
 
