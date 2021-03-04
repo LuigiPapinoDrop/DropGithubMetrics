@@ -1,5 +1,5 @@
 # Drop Github Metrics
-Is a tool to retrieve data from Github for our repository and retrieve aggregated data on pull requests.
+Is a tool to retrieve data from Github for our repositories and aggregate data on pull requests.
 
 ## Setup & run
 1. Add a line in `gradle.properties` with a valid github access token with the permissions to read the repositories data
