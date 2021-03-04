@@ -1,0 +1,21 @@
+query RepoPullRequestsQuery($repository: String!, $prsCount: Int!) {
+  repository(name: $repository, owner: "dropkitchen") {
+    name
+    pullRequests(orderBy: {field: CREATED_AT, direction: ASC}, last: $prsCount) {
+      nodes {
+        createdAt
+        publishedAt
+        title
+        deletions
+        additions
+        mergedAt
+        reviews(first: 15) {
+          nodes {
+            state
+            createdAt
+          }
+        }
+      }
+    }
+  }
+}

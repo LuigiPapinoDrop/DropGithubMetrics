@@ -1,0 +1,45 @@
+query SearchQuery($query: String!) {
+    search(first: 100, query: $query, type: ISSUE) {
+        nodes {
+            __typename
+            ... on PullRequest {
+                createdAt
+                publishedAt
+                title
+                deletions
+                additions
+                mergedAt
+                reviews(first: 15) {
+                    nodes {
+                        state
+                        createdAt
+                    }
+                }
+            }
+            ... on App {
+                __typename
+                name
+            }
+            ... on Issue {
+                __typename
+                title
+            }
+            ... on MarketplaceListing{
+                __typename
+                name
+            }
+            ... on Organization{
+                __typename
+                email
+            }
+            ... on Repository {
+                __typename
+                name
+            }
+            ... on User {
+                __typename
+                createdAt
+            }
+        }
+    }
+}
