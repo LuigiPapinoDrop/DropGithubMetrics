@@ -44,27 +44,27 @@ graphql {
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_14
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "14"
+        kotlinOptions.jvmTarget = "11"
         kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
 
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "14"
+        kotlinOptions.jvmTarget = "11"
     }
 }
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "14"
+    jvmTarget = "11"
     freeCompilerArgs = listOf("-Xjsr305=strict")
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "14"
+    jvmTarget = "11"
 }
 
 task("runDefault", JavaExec::class) {
